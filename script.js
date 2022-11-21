@@ -1,6 +1,10 @@
 const buttonCreateTask = document.getElementById('criar-tarefa');
 const buttonRemoveTasks = document.getElementById('apaga-tudo');
 const buttonRemoveDoneTasks = document.getElementById('remover-finalizados');
+// const buttonSaveTasks = document.getElementById('salvar-tarefas');
+// const buttonMoveUp = document.getElementById('mover-cima');
+// const buttonMoveDown = document.getElementById('mover-baixo');
+// const buttonRemoveSelected = document.getElementById('remover-selecionado');
 const listOfTasks = document.getElementById('lista-tarefas');
 const inputTask = document.getElementById('texto-tarefa');
 
@@ -22,7 +26,8 @@ const completeItem = ({ target }) => {
   }
 };
 
-const createTaskOnClick = () => {
+const createTaskOnClick = (taskValue) => {
+  if (taskValue.length < 1) { return false; }
   const task = document.createElement('li');
   task.innerText = inputTask.value;
   inputTask.value = '';
@@ -45,6 +50,25 @@ const removeCompletedOnClick = () => {
   });
 };
 
-buttonCreateTask.addEventListener('click', createTaskOnClick);
+// const SaveTasksOnClick = () => {
+//   const tasks = Array.from(listOfTasks.childNodes);
+//   console.log(JSON.stringify(tasks));
+//   localStorage.setItem('toDoList', JSON.stringify(tasks));
+// };
+
+// const retrieveTasks = () => {
+//   if (!localStorage.toDoList) { return false; }
+//   const tasks = JSON.parse(localStorage.getItem('toDoList'));
+//   console.log(tasks);
+//   tasks.forEach((task) => { createTaskOnClick(task); });
+// };
+
+// window.addEventListener('load', () => { retrieveTasks(); });
+
+buttonCreateTask.addEventListener('click', () => createTaskOnClick(inputTask));
 buttonRemoveTasks.addEventListener('click', removeTasksOnClick);
 buttonRemoveDoneTasks.addEventListener('click', removeCompletedOnClick);
+// buttonSaveTasks.addEventListener('click', SaveTasksOnClick);
+// buttonMoveUp.addEventListener('click', moveUpOnClick);
+// buttonMoveDown.addEventListener('click', moveDownOnClick);
+// buttonRemoveSelected.addEventListener('click', removeSelectedOnClick);
